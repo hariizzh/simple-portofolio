@@ -32,3 +32,22 @@ menuIcon.onclick = () => {
     menuIcon.classList.toggle('bx-x')
     navbar.classList.toggle('active')
 }
+
+const setDarkLightMode = () => {
+    // Cara1
+    const icon = document.getElementById('icon-dark-light');
+    document.body.classList.toggle('darkMode')
+    if (document.body.classList.contains('darkMode')) {
+        icon.src = "./img/sun.png"
+    } else {
+        icon.src = "./img/moon.png"
+    }
+
+    // Cara2 
+    // if (mode) {
+    //     document.body.setAttribute('id', 'darkMode')
+    // } else {
+    //     document.body.setAttribute('id', '')
+
+    // }
+}
