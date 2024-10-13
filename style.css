@@ -13,10 +13,10 @@
 }
 
 :root {
-	--bg-color: white;
+	--bg-color: rgb(241, 241, 241);
 	--second-bg-color: #dffcf7;
 	--text-color: #080808;
-	--second-text-color: white;
+	--second-text-color: rgb(241, 241, 241);
 	--main-color: #6effe9;
 	--sosial-main: #080808;
 	--second-social-main: #6effe9;
@@ -26,7 +26,7 @@
 .darkMode {
 	--bg-color: #080808;
 	--second-bg-color: #131313;
-	--text-color: white;
+	--text-color: rgb(241, 241, 241);
 	--second-text-color: #080808;
 	--sosial-main: #6effe9;
 	--second-social-main: #080808;

@@ -51,3 +51,34 @@ const setDarkLightMode = () => {
 
     // }
 }
+
+function sendEmail(e) {
+    e.preventDefault()
+    const messageInBody = `
+        Name: ${document.getElementById('fullNameContact').value} <br> <br>
+        Email: ${document.getElementById('emailContact').value} <br> <br>
+        Phone Number: ${document.getElementById('phoneNumberContact').value} <br> <br>
+        Message: ${document.getElementById('messageContact').value}
+    
+    `
+
+
+    Email.send({
+        Host: "smtp.elasticemail.com",
+        Username: "legendpalu12@gmail.com",
+        Password: "539D4430B67439E11D88CE8DF0C50EEA2193",
+        To: 'legendpalu12@gmail.com',
+        From: 'microzz27@gmail.com',
+        Subject: document.getElementById('subjectContact').value,
+        Body: `
+            Message from Contact Client in Web Portofolio: 
+            <br> <br>
+            ${messageInBody}
+        `
+    }).then(
+        message => alert(message)
+    ).catch(error => {
+        alert("Failed to send email: " + error);
+        console.log(error)
+    });
+}
