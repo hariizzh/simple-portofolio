@@ -52,33 +52,42 @@ const setDarkLightMode = () => {
     // }
 }
 
-function sendEmail(e) {
-    e.preventDefault()
-    const messageInBody = `
-        Name: ${document.getElementById('fullNameContact').value} <br> <br>
-        Email: ${document.getElementById('emailContact').value} <br> <br>
-        Phone Number: ${document.getElementById('phoneNumberContact').value} <br> <br>
-        Message: ${document.getElementById('messageContact').value}
-    
-    `
+// cara 2 submit form send email 
+const form = document.getElementById('form');
+const result = document.getElementById('result');
 
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    result.innerHTML = "Please wait..."
 
-    Email.send({
-        Host: "smtp.elasticemail.com",
-        Username: "legendpalu12@gmail.com",
-        Password: "539D4430B67439E11D88CE8DF0C50EEA2193",
-        To: 'legendpalu12@gmail.com',
-        From: 'microzz27@gmail.com',
-        Subject: document.getElementById('subjectContact').value,
-        Body: `
-            Message from Contact Client in Web Portofolio: 
-            <br> <br>
-            ${messageInBody}
-        `
-    }).then(
-        message => alert(message)
-    ).catch(error => {
-        alert("Failed to send email: " + error);
-        console.log(error)
-    });
-}
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: json
+    })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = json.message;
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function () {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
